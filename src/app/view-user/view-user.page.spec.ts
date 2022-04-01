@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { RouterModule } from '@angular/router';
-import { UserComponentModule } from '../user/user.module';
+import { ViewUserPageRoutingModule } from './view-user-routing.module';
 
-import { HomePage } from './home.page';
+import { ViewUserPage } from './view-user.page';
 
-describe('HomePage', () => {
-  let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
+describe('ViewUserPage', () => {
+  let component: ViewUserPage;
+  let fixture: ComponentFixture<ViewUserPage>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomePage ],
-      imports: [IonicModule.forRoot(), UserComponentModule, RouterModule.forRoot([])]
+      declarations: [ ViewUserPage ],
+      imports: [IonicModule.forRoot(), ViewUserPageRoutingModule, RouterModule.forRoot([])]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    fixture = TestBed.createComponent(ViewUserPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

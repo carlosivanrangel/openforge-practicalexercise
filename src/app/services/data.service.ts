@@ -1,83 +1,40 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HTTP } from '@awesome-cordova-plugins/http/ngx';
 
-export interface Message {
-  fromName: string;
-  subject: string;
-  date: string;
+export interface UserList {
+  login: string;
   id: number;
-  read: boolean;
+  avatar_url: string;
 }
+
+export interface User {
+  id: number;
+  login: string;
+  avatar_url: string;
+  name: string;
+  bio: string;
+  company: string;
+  location: string;
+  blog: string;
+  public_repos: number;
+}
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
-  public messages: Message[] = [
-    {
-      fromName: 'Matt Chorsey',
-      subject: 'New event: Trip to Vegas',
-      date: '9:32 AM',
-      id: 0,
-      read: false
-    },
-    {
-      fromName: 'Lauren Ruthford',
-      subject: 'Long time no chat',
-      date: '6:12 AM',
-      id: 1,
-      read: false
-    },
-    {
-      fromName: 'Jordan Firth',
-      subject: 'Report Results',
-      date: '4:55 AM',
-      id: 2,
-      read: false
-    },
-    {
-      fromName: 'Bill Thomas',
-      subject: 'The situation',
-      date: 'Yesterday',
-      id: 3,
-      read: false
-    },
-    {
-      fromName: 'Joanne Pollan',
-      subject: 'Updated invitation: Swim lessons',
-      date: 'Yesterday',
-      id: 4,
-      read: false
-    },
-    {
-      fromName: 'Andrea Cornerston',
-      subject: 'Last minute ask',
-      date: 'Yesterday',
-      id: 5,
-      read: false
-    },
-    {
-      fromName: 'Moe Chamont',
-      subject: 'Family Calendar - Version 1',
-      date: 'Last Week',
-      id: 6,
-      read: false
-    },
-    {
-      fromName: 'Kelly Richardson',
-      subject: 'Placeholder Headhots',
-      date: 'Last Week',
-      id: 7,
-      read: false
-    }
-  ];
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
-  public getMessages(): Message[] {
-    return this.messages;
+  public getUsers(since: number, per_page: number) {
+    return this.httpClient.get<Array<UserList>>("api/users?since="+ since.toString() 
+    +"&per_page=" + per_page.toString() + "&accept=application/vnd.github.v3+json");
   }
 
-  public getMessageById(id: number): Message {
-    return this.messages[id];
+  public getUserByUsername(username: string) {
+    return this.httpClient.get<User>("api/users/" + username + "?accept=application/vnd.github.v3+json",);
   }
+
 }

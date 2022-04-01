@@ -1,0 +1,11 @@
+
+<ion-item *ngIf="user" [routerLink]="'/user/' + user.login" [detail]="false">
+  <ion-thumbnail slot="start">
+    <ion-img [src]="user.avatar_url"></ion-img>
+  </ion-thumbnail>
+  <ion-label class="ion-text-wrap">
+    <h2>
+      {{ user.login }}
+    </h2>
+  </ion-label>
+</ion-item>

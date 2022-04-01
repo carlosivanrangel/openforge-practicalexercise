@@ -1,0 +1,57 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="ion-padding">
+
+    <ion-item>
+      <ion-label position="stacked">
+        <h2>User:</h2>
+      </ion-label>
+      <ion-input [(ngModel)]="userName"></ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button expand="block" (click)="searchUser()">Search</ion-button>
+    </div>
+
+    <ion-item lines="none" *ngIf="user">
+
+      <ion-thumbnail slot="start">
+        <ion-img [src]="user.avatar_url"></ion-img>
+      </ion-thumbnail>
+      <ion-label>
+        <h2 [ngStyle]="{'color': usernameTextColor}">
+          {{user.name}}
+        </h2>
+      </ion-label>
+    </ion-item>
+
+    <div class="ion-padding" *ngIf="user">
+      <h4><u>Bio</u></h4>
+      <p>
+        {{user.bio ? user.bio : "-"}}
+      </p>
+      <h4><u>Company</u></h4>
+      <p>
+        {{user.company ? user.company : "-"}}
+      </p>
+      <h4><u>Location</u></h4>
+      <p>
+        {{user.location ? user.location : "-"}}
+      </p>
+      <h4><u>Website/Blog</u></h4>
+      <p>
+        {{user.blog ? user.blog : "-"}}
+      </p>
+      <ion-button *ngIf="user.blog" expand="block" (click)="searchUrlOnBrowser()" fill="outline">Go to URL
+      </ion-button>
+    </div>
+
+  </div>
+</ion-content>
